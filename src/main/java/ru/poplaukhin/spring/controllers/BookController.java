@@ -54,8 +54,8 @@ public class BookController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String newPerson(@Valid @ModelAttribute("book") BookDto book,
-                            BindingResult bindingResult) throws IOException {
+    public String newBook(@Valid @ModelAttribute("book") BookDto book,
+                          BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) {
             return "books/new";
         }
@@ -66,14 +66,14 @@ public class BookController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editPerson(@PathVariable("id") int id, Model model) {
+    public String editBook(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookDAO.show(id));
         return "books/edit";
     }
 
     @PatchMapping("/{id}")
-    public String updatePerson(@PathVariable("id") int id, @ModelAttribute("book") @Valid Book book,
-                               BindingResult bindingResult) {
+    public String updateBook(@PathVariable("id") int id, @ModelAttribute("book") @Valid Book book,
+                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "books/edit";
         }
@@ -84,7 +84,7 @@ public class BookController {
     }
 
     @DeleteMapping("{id}")
-    public String deletePerson(@PathVariable("id") int id) {
+    public String deleteBook(@PathVariable("id") int id) {
         bookDAO.delete(id);
 
         return "redirect:/books";
